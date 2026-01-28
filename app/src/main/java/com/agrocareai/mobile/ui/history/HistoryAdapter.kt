@@ -1,50 +1,30 @@
 package com.agrocareai.mobile.ui.history
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.agrocareai.mobile.data.local.DiseaseEntity
+import androidx.recyclerview.widget.*
+import com.agrocareai.mobile.data.local.ScanResult
 import com.agrocareai.mobile.databinding.ItemHistoryBinding
-import java.io.File
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
-class HistoryAdapter : ListAdapter<DiseaseEntity, HistoryAdapter.ViewHolder>(DiffCallback()) {
+class HistoryAdapter : ListAdapter<ScanResult, HistoryAdapter.VH>(Diff()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+    class VH(val b: ItemHistoryBinding) : RecyclerView.ViewHolder(b.root)
+
+    class Diff : DiffUtil.ItemCallback<ScanResult>() {
+        override fun areItemsTheSame(o: ScanResult, n: ScanResult) = o.id == n.id
+        override fun areContentsTheSame(o: ScanResult, n: ScanResult) = o == n
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        VH(ItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-    class ViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DiseaseEntity) {
-            binding.txtDiseaseTitle.text = item.diseaseName
-            binding.txtConfidence.text = "${(item.confidence * 100).toInt()}%"
-
-            val date = Date(item.timestamp)
-            val format = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
-            binding.txtDate.text = format.format(date)
-
-            if (item.imageUrl.isNotEmpty()) {
-                val imgFile = File(item.imageUrl)
-                if (imgFile.exists()) {
-                    val bitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-                    binding.imgThumbnail.setImageBitmap(bitmap)
-                }
-            }
-        }
-    }
-
-    class DiffCallback : DiffUtil.ItemCallback<DiseaseEntity>() {
-        override fun areItemsTheSame(oldItem: DiseaseEntity, newItem: DiseaseEntity) = oldItem.id == newItem.id
-        override fun areContentsTheSame(oldItem: DiseaseEntity, newItem: DiseaseEntity) = oldItem == newItem
+    override fun onBindViewHolder(holder: VH, position: Int) {
+        val item = getItem(position)
+        // Using standard fields to avoid mismatch errors
+        holder.b.txtDisease.text = item.diseaseName
+        holder.b.txtConfidence.text = "${(item.confidence * 100).toInt()}%"
+        holder.b.txtDate.text = SimpleDateFormat("dd MMM", Locale.getDefault()).format(Date(item.timestamp))
     }
 }

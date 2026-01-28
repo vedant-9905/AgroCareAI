@@ -1,115 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/linear_bg">
+    android:background="#000000">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_height="match_parent" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/gradient_top_shadow"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/topBar"
+    <LinearLayout
+        android:id="@+id/overlayContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginHorizontal="24dp"
-        android:padding="12dp"
-        android:background="@drawable/bg_glass_panel"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="#80000000"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txtStatus"
-            android:layout_width="wrap_content"
+            android:id="@+id/txtOverlayResult"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AI ACTIVE"
-            android:textColor="@color/neon_green"
-            android:textSize="12sp"
-            android:letterSpacing="0.2"
+            android:text="Scanning..."
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:drawableStartCompat="@drawable/ic_dot_active"
-            android:drawablePadding="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:gravity="center"/>
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_help"
-            app:tint="@color/text_secondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+        <ProgressBar
+            android:id="@+id/progressRisk"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="8dp"
+            android:progressDrawable="@drawable/bg_scan_frame"
+            android:progress="0"
+            android:max="100"/>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:layout_width="280dp"
-        android:layout_height="280dp"
-        android:src="@drawable/bg_scan_frame"
-        android:alpha="0.7"
-        app:tint="@color/text_primary"
-        app:layout_constraintTop_toTopOf="parent"
+    <View
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/bg_scan_frame"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_glass_panel_bottom"
-        android:paddingBottom="48dp"
-        android:paddingTop="24dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:id="@+id/txtInstruction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Align leaf within frame"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnCapture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <ImageButton
-            android:id="@+id/btnCapture"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/btn_capture_glowing"
-            android:contentDescription="Capture"
-            android:elevation="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <ImageButton
-            android:id="@+id/btnHistory"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@android:drawable/ic_menu_recent_history"
-            app:tint="@color/text_primary"
-            app:layout_constraintEnd_toStartOf="@id/btnCapture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btnCapture"
-            app:layout_constraintBottom_toBottomOf="@id/btnCapture"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/btnCapture"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/bg_circle_white"
+        android:src="@android:drawable/ic_menu_camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="#000000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,37 +5,25 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
 
+// The Data Structure
 data class DiseaseInfo(
-    val id: String,
-    val name: String,
-    val crop: String,
-    val symptoms: String,
-    val organic_cure: String,
-    val chemical_cure: String,
-    val prevention: String
+    val id: String, val name: String, val crop: String,
+    val symptoms: String, val organic_cure: String,
+    val chemical_cure: String, val prevention: String
 )
 
 class DiseaseRepository(private val context: Context) {
 
-    fun getAllDiseases(): List<DiseaseInfo> {
-        val jsonString = getJsonDataFromAsset("diseases.json") ?: return emptyList()
-        val listType = object : TypeToken<List<DiseaseInfo>>() {}.type
-        return Gson().fromJson(jsonString, listType)
-    }
+    // Simple function to read the local file
+    fun getDiseaseDetails(name: String): DiseaseInfo? {
+        val jsonString = try {
+            context.assets.open("diseases.json").bufferedReader().use { it.readText() }
+        } catch (e: IOException) { return null }
 
-    fun getDiseaseByName(name: String): DiseaseInfo? {
-        val all = getAllDiseases()
-        // Simple fuzzy search (e.g., if AI says "Rice Leaf Blast", we find "Leaf Blast")
-        return all.find { name.contains(it.name, ignoreCase = true) }
-            ?: all.find { it.id == "healthy" } // Fallback
-    }
+        val type = object : TypeToken<List<DiseaseInfo>>() {}.type
+        val list: List<DiseaseInfo> = Gson().fromJson(jsonString, type)
 
-    private fun getJsonDataFromAsset(fileName: String): String? {
-        return try {
-            context.assets.open(fileName).bufferedReader().use { it.readText() }
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            null
-        }
+        return list.find { name.contains(it.name, ignoreCase = true) }
+            ?: list.find { it.id == "healthy" }
     }
 }
