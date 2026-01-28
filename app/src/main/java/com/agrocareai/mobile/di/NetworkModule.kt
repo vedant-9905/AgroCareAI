@@ -1,6 +1,7 @@
 package com.agrocareai.mobile.di
 
 import com.agrocareai.mobile.data.api.WeatherService
+import com.agrocareai.mobile.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -72,7 +72,19 @@ dependencies {
 
     // Coil (Images)
     implementation("io.coil-kt:coil:2.6.0")
+    implementation("com.google.android.gms:play-services-location:21.1.0")
 
+    // 2. Google ML Kit (Offline Translation)
+    implementation("com.google.mlkit:translate:17.0.2")
+
+    // 3. PDF Generation (For "Export Report")
+    implementation("com.itextpdf:itext7-core:7.2.5")
+
+    // 4. Charts/Graphs (For Market Trends/History)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    // 5. Text To Speech is built-in (No external lib needed), but we need Coroutines for it
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
