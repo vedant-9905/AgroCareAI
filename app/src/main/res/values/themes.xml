@@ -1,9 +1,17 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.AgroCareAI" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<resources>
+    <style name="Theme.AgroCareAI" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="colorPrimary">@color/brand_green_mid</item>
+        <item name="colorSecondary">@color/brand_yellow</item>
+        <item name="android:colorBackground">?attr/colorSurfaceVariant</item>
     </style>
 
-    <style name="Theme.AgroCareAI" parent="Base.Theme.AgroCareAI" />
+    <style name="AgroCard">
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">6dp</item>
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
 </resources>
