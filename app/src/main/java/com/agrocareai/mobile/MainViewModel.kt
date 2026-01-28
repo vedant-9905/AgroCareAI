@@ -7,6 +7,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.agrocareai.mobile.data.api.WeatherService
 import com.agrocareai.mobile.utils.Constants
+import com.agrocareai.mobile.utils.DiseaseInfo
+import com.agrocareai.mobile.utils.DiseaseRepository
 import com.agrocareai.mobile.utils.LanguageManager
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,15 +31,22 @@ class MainViewModel @Inject constructor(
     private val _state = MutableStateFlow(AppState())
     val state = _state.asStateFlow()
 
-    // Initialize Language Manager
     val languageManager = LanguageManager(application)
     private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(application)
+
+    // --- NEW: Encyclopedia Repository ---
+    private val repository = DiseaseRepository(application)
 
     init {
         fetchLocationAndWeather()
     }
 
-    @SuppressLint("MissingPermission") // Checked in Activity
+    // Helper to get cures
+    fun getDiseaseDetails(name: String): DiseaseInfo? {
+        return repository.getDiseaseByName(name)
+    }
+
+    @SuppressLint("MissingPermission")
     fun fetchLocationAndWeather() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             if (location != null) {
@@ -51,7 +60,6 @@ class MainViewModel @Inject constructor(
     private fun fetchWeather(lat: Double, lon: Double) {
         viewModelScope.launch {
             try {
-                // Use a real key here or Put "DEMO" for testing
                 val response = weatherService.getCurrentWeather(lat, lon, Constants.WEATHER_API_KEY)
                 val info = "${response.name}: ${response.main.temp}°C, ${response.weather[0].description}"
 

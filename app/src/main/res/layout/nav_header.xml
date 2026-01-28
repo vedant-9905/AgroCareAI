@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
-    android:background="#004D40"
+    android:layout_height="190dp"
+    android:background="@drawable/bg_header_gradient"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@mipmap/ic_launcher_round"
-        android:background="@android:drawable/toasts_bg"
-        android:padding="4dp"/>
+        android:id="@+id/imageView"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:contentDescription="User Avatar"
+        android:padding="2dp"
+        android:background="@drawable/bg_circle_white"
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome, Farmer"
+        android:layout_marginTop="12dp"
+        android:text="Namaste, Farmer"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="12dp"/>
+        android:textSize="18sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+91 98765 43210"
-        android:textColor="#B2DFDB"
-        android:textSize="14sp"/>
+        android:text="farmer@agrocare.com"
+        android:textColor="#E0E0E0"
+        android:textSize="14sp" />
+
 </LinearLayout>

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "leaf_blast",
+    "name": "Leaf Blast",
+    "crop": "Rice",
+    "symptoms": "White to gray-green lesions or spots with dark borders.",
+    "organic_cure": "Spray Neeam oil 3%. Avoid excessive nitrogen fertilizer.",
+    "chemical_cure": "Spray Tricyclazole 75 WP @ 0.6g/liter or Carbendazim 50 WP @ 1g/liter.",
+    "prevention": "Use resistant varieties and treat seeds with Pseudomonas fluorescens."
+  },
+  {
+    "id": "brown_spot",
+    "name": "Brown Spot",
+    "crop": "Rice",
+    "symptoms": "Round to oval dark-brown spots on leaves.",
+    "organic_cure": "Spray mixture of cow urine and water (1:10).",
+    "chemical_cure": "Spray Mancozeb 2.5g/liter of water.",
+    "prevention": "Proper crop nutrition and soil health management."
+  },
+  {
+    "id": "bacterial_blight",
+    "name": "Bacterial Blight",
+    "crop": "Rice",
+    "symptoms": "Water-soaked streaks on leaf blades, turning yellow.",
+    "organic_cure": "Spray fresh cow dung slurry extract.",
+    "chemical_cure": "Spray Copper Oxychloride 50 WP @ 2.5g/liter + Streptocycline @ 0.1g/liter.",
+    "prevention": "Secure disease-free seeds and keep fields clean."
+  },
+  {
+    "id": "healthy",
+    "name": "Healthy",
+    "crop": "All",
+    "symptoms": "Plant looks vibrant green with no spots.",
+    "organic_cure": "Continue standard maintenance.",
+    "chemical_cure": "None required.",
+    "prevention": "Maintain regular watering and fertilization schedule."
+  }
+]
